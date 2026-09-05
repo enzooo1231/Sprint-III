@@ -13,12 +13,12 @@ public class Paciente {
     private String telefone;
     private String email;
 
-    public Plano getIdPlano() {
-        return idPlano;
+    public Plano getPlano() {
+        return plano;
     }
 
-    public void setIdPlano(Plano idPlano) {
-        this.idPlano = idPlano;
+    public void setPlano(Plano plano) {
+        this.plano = plano;
     }
 
     public Integer getIdPaciente() {

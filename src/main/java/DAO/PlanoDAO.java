@@ -25,7 +25,7 @@ public class PlanoDAO implements GenericDAO<Plano,Integer>{
 
             while(rs.next()){
                 Plano plano = new Plano();
-                plano.setId_plano(rs.getInt("ID_PLANO"));
+                plano.setidPlano(rs.getInt("ID_PLANO"));
                 plano.setNome(rs.getString("NOME"));
                 plano.setTipo(rs.getString("TIPO"));
                 plano.setValorMensal(rs.getDouble("VALOR_MENSAL"));

@@ -47,7 +47,7 @@ public class MedicoDAO implements GenericDAO<Medico, Integer> {
 
     public void excluir(Integer id){
 
-        String sql = "DELETE FROM medico WHERE ID_MEDICO = ?";
+        String sql = "DELETE FROM medico WHERE id_paciente = ?";
         try(Connection connection = ConnectionFactory.obterConexao();
             PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setInt(1, id);
@@ -73,9 +73,9 @@ public class MedicoDAO implements GenericDAO<Medico, Integer> {
                 medico.setIdMedico(rs.getInt("ID_MEDICO"));
                 medico.setNome(rs.getString("NOME"));
                 medico.setCrm(rs.getString("CRM"));
-                medico.setCrm(rs.getString("ESPECIALIDADE"));
-                medico.setCrm(rs.getString("TELEFONE"));
-                medico.setCrm(rs.getString("EMAIL"));
+                medico.setEspecialidade(rs.getString("ESPECIALIDADE"));
+                medico.setTelefone(rs.getString("TELEFONE"));
+                medico.setEmail(rs.getString("EMAIL"));
             }
         }catch (SQLException e){
             System.out.println(e.getMessage());

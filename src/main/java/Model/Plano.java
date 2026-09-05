@@ -12,7 +12,7 @@ public class Plano {
         return idPlano;
     }
 
-    public void setId_plano(Integer idPlano) {
+    public void setidPlano(Integer idPlano) {
         idPlano = idPlano;
     }
 
