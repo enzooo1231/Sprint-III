@@ -17,7 +17,7 @@ public class PlanoDAO implements GenericDAO<Plano,Integer>{
     public List<Plano> listar() {
 
         List<Plano> lista = new ArrayList<>();
-        String sql = "SELECT * FROM PLANOS";
+        String sql = "SELECT * FROM PLANO";
 
         try(Connection connection = ConnectionFactory.obterConexao();
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -25,7 +25,7 @@ public class PlanoDAO implements GenericDAO<Plano,Integer>{
 
             while(rs.next()){
                 Plano plano = new Plano();
-                plano.setidPlano(rs.getInt("ID_PLANO"));
+                plano.setIdPlano(rs.getInt("ID_PLANO"));
                 plano.setNome(rs.getString("NOME"));
                 plano.setTipo(rs.getString("TIPO"));
                 plano.setValorMensal(rs.getDouble("VALOR_MENSAL"));
@@ -33,7 +33,7 @@ public class PlanoDAO implements GenericDAO<Plano,Integer>{
             }
 
         }catch (SQLException e){
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
 
         return lista;

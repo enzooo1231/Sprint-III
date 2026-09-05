@@ -7,21 +7,22 @@ public class Plano {
     private String tipo;
     private double valorMensal;
 
-
-    public Integer getidPlano() {
+    public Integer getIdPlano() {
         return idPlano;
     }
 
-    public void setidPlano(Integer idPlano) {
-        idPlano = idPlano;
+    public void setIdPlano(Integer idPlano) {
+        this.idPlano = idPlano;
     }
+
+
 
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
-        nome = nome;
+        this.nome = nome;
     }
 
     public String getTipo() {
@@ -42,7 +43,7 @@ public class Plano {
 
     @Override
     public String toString() {
-        return  "ID: " + getidPlano() + " | " + "Nome: " + getNome() +
+        return  "ID: " + getIdPlano() + " | " + "Nome: " + getNome() +
                 " | " + "Tipo: " + getTipo() + " | " + "Valor Mensal: " + getValorMensal();
     }
 }

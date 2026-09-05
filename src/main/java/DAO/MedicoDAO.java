@@ -14,17 +14,16 @@ public class MedicoDAO implements GenericDAO<Medico, Integer> {
 
 
     public void inserir(Medico entidade){
-        String sql = "INSERT INTO medico (id_medico, nome, crm, especialidade, telefone, email) values(?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO medico (ID_MEDICO, NOME, CRM, ESPECIALIDADE, TELEFONE, EMAIL) VALUES (SEQ_MEDICO.NEXTVAL, ?, ?, ?, ?, ?)";
 
         try(Connection connection = ConnectionFactory.obterConexao();
             PreparedStatement ps = connection.prepareStatement(sql)){
 
-            ps.setInt(1,entidade.getIdMedico());
-            ps.setString(2, entidade.getNome());
-            ps.setString(3, entidade.getCrm());
-            ps.setString(4, entidade.getEspecialidade());
-            ps.setString(5, entidade.getTelefone());
-            ps.setString(6, entidade.getEmail());
+            ps.setString(1, entidade.getNome());
+            ps.setString(2, entidade.getCrm());
+            ps.setString(3, entidade.getEspecialidade());
+            ps.setString(4, entidade.getTelefone());
+            ps.setString(5, entidade.getEmail());
             ps.execute();
 
         }catch (SQLException e ){
@@ -38,6 +37,7 @@ public class MedicoDAO implements GenericDAO<Medico, Integer> {
         try(Connection connection = ConnectionFactory.obterConexao();
         PreparedStatement ps = connection.prepareStatement(sql);){
             ps.setString(1, medico.getTelefone());
+            ps.setInt(2, medico.getIdMedico());
             ps.execute();
         }catch (SQLException e){
             System.out.println(e.getMessage());
@@ -47,7 +47,7 @@ public class MedicoDAO implements GenericDAO<Medico, Integer> {
 
     public void excluir(Integer id){
 
-        String sql = "DELETE FROM medico WHERE id_paciente = ?";
+        String sql = "DELETE FROM medico WHERE id_medico = ?";
         try(Connection connection = ConnectionFactory.obterConexao();
             PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setInt(1, id);
@@ -76,6 +76,7 @@ public class MedicoDAO implements GenericDAO<Medico, Integer> {
                 medico.setEspecialidade(rs.getString("ESPECIALIDADE"));
                 medico.setTelefone(rs.getString("TELEFONE"));
                 medico.setEmail(rs.getString("EMAIL"));
+                listar.add(medico);
             }
         }catch (SQLException e){
             System.out.println(e.getMessage());

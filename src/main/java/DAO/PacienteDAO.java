@@ -14,18 +14,18 @@ public class PacienteDAO implements GenericDAO <Paciente, Integer> {
 
 
     public void inserir(Paciente entidade){
-        String sql = "INSERT INTO paciente (id_paciente, nome, cpf, data_nascimento, telefone, email, id_plano) values(?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO paciente (id_paciente, nome, cpf, data_nascimento, telefone, email, id_plano) values(SEQ_PACIENTE.NEXTVAL, ?, ?, ?, ?, ?, ?)";
 
         try(Connection connection = ConnectionFactory.obterConexao();
             PreparedStatement ps = connection.prepareStatement(sql)){
 
-            ps.setInt(1,entidade.getIdPaciente());
-            ps.setString(2, entidade.getNome());
-            ps.setString(3, entidade.getCpf());
-            ps.setDate(4, Date.valueOf(entidade.getData()));
-            ps.setString(5, entidade.getTelefone());
-            ps.setString(6, entidade.getEmail());
-            ps.setInt(7,entidade.getPlano().getidPlano());
+
+            ps.setString(1, entidade.getNome());
+            ps.setString(2, entidade.getCpf());
+            ps.setDate(3, Date.valueOf(entidade.getData()));
+            ps.setString(4, entidade.getTelefone());
+            ps.setString(5, entidade.getEmail());
+            ps.setInt(6,entidade.getPlano().getIdPlano());
             ps.execute();
 
         }catch (SQLException e ){
@@ -52,6 +52,7 @@ public class PacienteDAO implements GenericDAO <Paciente, Integer> {
                 paciente.setData(rs.getDate("DATA_NASCIMENTO").toLocalDate());
                 paciente.setTelefone(rs.getString("TELEFONE"));
                 paciente.setEmail(rs.getString("EMAIL"));
+                plano.setIdPlano(rs.getInt("ID_PLANO"));
                 paciente.setPlano(plano);
                 lista.add(paciente);
             }
@@ -64,10 +65,11 @@ public class PacienteDAO implements GenericDAO <Paciente, Integer> {
 
     public void atualizar(Paciente paciente){
 
-        String sql = "UPDATE medico SET telefone = ? WHERE id_paciente = ?";
+        String sql = "UPDATE paciente SET telefone = ? WHERE id_paciente = ?";
         try(Connection connection = ConnectionFactory.obterConexao();
             PreparedStatement ps = connection.prepareStatement(sql);){
             ps.setString(1, paciente.getTelefone());
+            ps.setInt(2, paciente.getIdPaciente());
             ps.execute();
         }catch (SQLException e){
             System.out.println(e.getMessage());
